@@ -39,18 +39,24 @@ function checkGameEnd() {
     const resultElement = document.getElementById("round-result");
     const playerChoiceElement = document.getElementById("player-choice");
     const computerChoiceElement = document.getElementById("computer-choice");
+    const gameResultElement = document.getElementById("game-result");
 
-    // Update the scores first
+    // Check if the game is already won
+    if (playerScore === 5 || computerScore === 5) {
+        return;  // Game is already won, do nothing
+    }
+
+    // Update the scores
     if (
         (playerSelection === "Rock" && computerSelection === "Scissors") ||
         (playerSelection === "Paper" && computerSelection === "Rock") ||
         (playerSelection === "Scissors" && computerSelection === "Paper")
     ) {
-        playerScore++;  // Player wins, so increment player's score
-        document.getElementById("player-score").textContent = "Player Wins: " + playerScore; // Update player score
+        playerScore++;
+        document.getElementById("player-score").textContent = "Player Wins: " + playerScore;
     } else if (playerSelection !== computerSelection) {
-        computerScore++;  // Computer wins, so increment computer's score
-        document.getElementById("computer-score").textContent = "Computer Wins: " + computerScore; // Update computer score
+        computerScore++;
+        document.getElementById("computer-score").textContent = "Computer Wins: " + computerScore;
     }
 
     // Determine the winner and update the result element
@@ -82,11 +88,8 @@ function checkGameEnd() {
     const roundCountElement = document.getElementById("round-count");
     roundCountElement.textContent = "Round: " + (playerScore + computerScore);
 
-    // Check if the game should end
-    if (playerScore === 5 || computerScore === 5) {
-        // Display the winner
-        alert(result);
-    }
+    // Update the game result
+    gameResultElement.textContent = result;
 }
 
 
